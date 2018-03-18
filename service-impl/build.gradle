@@ -5,6 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile project('service-api')
+    compile project(':service-api')
+    compile project(':appliance-api')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

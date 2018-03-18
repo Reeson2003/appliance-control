@@ -16,8 +16,7 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 .idea/
-/api/build/
 /build/
-/server/out/
+/*/out/
 /server/build/
-/appliance-api/build/
+/*/build/
