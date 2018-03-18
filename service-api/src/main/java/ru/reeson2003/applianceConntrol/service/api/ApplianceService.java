@@ -9,13 +9,13 @@ import java.util.Collection;
  * @author Pavel Gavrilov
  */
 public interface ApplianceService {
-    Collection<Appliance> getAppliances();
+    Collection<ApplianceEntity> getAppliances();
 
-    Collection<Appliance> getAppliancesByName();
+    Collection<ApplianceEntity> getAppliancesByName(String name);
 
-    Appliance getApplianceById(Long id);
+    ApplianceEntity getApplianceById(Long id);
 
-    Long addAppliance(Appliance appliance);
+    ApplianceEntity addAppliance(Appliance appliance);
 
     void removeAppliance(Long applianceId);
 
