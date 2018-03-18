@@ -1,3 +1,5 @@
 rootProject.name = 'appliance-control'
-include 'api'
+include 'appliance-api'
+include 'server'
+include 'service-api'
 
