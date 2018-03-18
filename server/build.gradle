@@ -21,6 +21,9 @@ repositories {
 
 
 dependencies {
+    compile project('appliance-api')
+    compile project('service-api')
+    compile project('service-impl')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

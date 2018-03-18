@@ -6,7 +6,9 @@ import java.util.Collection;
 /**
  * @author Pavel Gavrilov
  */
-public interface Appliance extends Serializable {
+public interface Appliance extends Serializable, Cloneable {
+    Appliance clone();
+
     String getIdentifier();
 
     State getState();

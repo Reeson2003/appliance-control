@@ -25,12 +25,9 @@ public class ApplianceController implements RestConstants {
     }
 
     @RequestMapping(value = APPLIANCES, method = RequestMethod.GET)
-    Collection<ApplianceEntity> getAppliances() {
-        return applianceService.getAppliances();
-    }
-
-    @RequestMapping(value = APPLIANCES, method = RequestMethod.GET)
-    Collection<ApplianceEntity> getAppliancesByName(@RequestParam("name") String name) {
+    Collection<ApplianceEntity> getAppliances(@RequestParam(value = "name", required = false) String name) {
+        if (name == null)
+            return applianceService.getAppliances();
         return applianceService.getAppliancesByName(name);
     }
 
