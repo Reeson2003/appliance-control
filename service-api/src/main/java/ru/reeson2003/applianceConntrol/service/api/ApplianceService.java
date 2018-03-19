@@ -1,7 +1,7 @@
 package ru.reeson2003.applianceConntrol.service.api;
 
+import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntity;
 import ru.reeson2003.applianceControl.api.Action;
-import ru.reeson2003.applianceControl.api.Appliance;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ public interface ApplianceService {
 
     ApplianceEntity getApplianceById(Long id);
 
-    ApplianceEntity addAppliance(Appliance appliance);
+    ApplianceEntity addAppliance(String applianceName);
 
     void removeAppliance(Long applianceId);
 

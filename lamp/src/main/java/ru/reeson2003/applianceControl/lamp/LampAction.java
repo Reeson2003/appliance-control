@@ -8,13 +8,9 @@ import java.util.Collections;
 /**
  * @author Pavel Gavrilov
  */
-public abstract class LampAction implements Action, ActionNames {
-    @Override
-    public Collection<String> getOptionNames() {
-        return Collections.emptyList();
-    }
+public abstract class LampAction extends Action implements ActionNames {
 
-    @Override
-    public void setOption(String name, String value) {
+    public LampAction(String name) {
+        super(name);
     }
 }

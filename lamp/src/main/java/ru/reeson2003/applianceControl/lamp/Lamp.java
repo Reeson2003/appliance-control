@@ -10,22 +10,37 @@ import java.util.concurrent.CompletableFuture;
 /**
  * @author Pavel Gavrilov
  */
-public class Lamp extends AbstractAppliance implements ActionNames {
+public class Lamp extends AbstractAppliance implements ActionNames, StateNames {
     private static final String IDENTIFIER = "Lamp";
     private State state;
     private List<Action> actions;
 
     public Lamp() {
         super(IDENTIFIER);
-    }
-
-    private void initState() {
         setOffState();
     }
 
+    private Lamp(State state) {
+        super(IDENTIFIER);
+        switch (state.getName()) {
+            case ON:
+                setOnState();
+                return;
+            case OFF:
+                setOffState();
+                return;
+            default: throw new IllegalArgumentException("Incorrect state: " + state.getName());
+        }
+    }
+
     @Override
-    public Appliance clone() {
+    public Appliance getNew() {
         return new Lamp();
+    }
+
+    @Override
+    public Appliance getOld(State state) {
+        return new Lamp(state);
     }
 
     @Override
@@ -40,9 +55,7 @@ public class Lamp extends AbstractAppliance implements ActionNames {
 
     @Override
     public void performAction(Action action) throws PerformActionException {
-        if (!(action instanceof LampAction))
-            throw new PerformActionException("Incompatible action");
-        switch (action.getActionName()) {
+        switch (action.getName()) {
             case TURN_ON:
                 performTurnOnAction();
                 break;
@@ -50,6 +63,7 @@ public class Lamp extends AbstractAppliance implements ActionNames {
                 performTurnOffAction();
                 break;
             default:
+                throw new PerformActionException("Incompatible action");
         }
     }
 

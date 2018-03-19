@@ -1,15 +1,29 @@
 package ru.reeson2003.applianceControl.api;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * @author Pavel Gavrilov
  */
-public interface Action extends Serializable {
-    String getActionName();
+public class Action {
+    private String name;
+    private Collection<Parameter> parameters;
 
-    Collection<String> getOptionNames();
+    public Action(String name) {
+        this.name = name;
+        this.parameters = new ArrayList<>();
+    }
 
-    void setOption(String name, String value);
+    public Collection<Parameter> getParameters() {
+        return parameters;
+    }
+
+    public void setParameter(String name, String value) {
+        parameters.add(new Parameter(name, value));
+    }
+
+    public String getName() {
+        return name;
+    }
 }

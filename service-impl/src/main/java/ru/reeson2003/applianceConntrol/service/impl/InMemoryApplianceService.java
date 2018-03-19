@@ -1,14 +1,18 @@
 package ru.reeson2003.applianceConntrol.service.impl;
 
-import ru.reeson2003.applianceConntrol.service.api.ApplianceEntity;
+import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
+import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntity;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
+import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntityImpl;
 import ru.reeson2003.applianceControl.api.Action;
 import ru.reeson2003.applianceControl.api.Appliance;
 import ru.reeson2003.applianceControl.api.PerformActionException;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -18,6 +22,11 @@ import java.util.stream.Collectors;
 public class InMemoryApplianceService implements ApplianceService {
     private AtomicLong idGenerator = new AtomicLong(0);
     private Map<Long, Appliance> appliances = new ConcurrentHashMap<>();
+    private ApplianceList applianceList;
+
+    public InMemoryApplianceService(ApplianceList applianceList) {
+        this.applianceList = applianceList;
+    }
 
     @Override
     public Collection<ApplianceEntity> getAppliances() {
@@ -42,10 +51,20 @@ public class InMemoryApplianceService implements ApplianceService {
     }
 
     @Override
-    public ApplianceEntity addAppliance(Appliance appliance) {
-        Long id = idGenerator.getAndIncrement();
-        appliances.put(id, appliance);
-        return new ApplianceEntityImpl(id, appliance);
+    public ApplianceEntity addAppliance(String applianceName) {
+        try {
+            return CompletableFuture
+                    .supplyAsync(() -> idGenerator.getAndIncrement())
+                    .thenApply(id -> {
+                        Appliance appliance = applianceList.newAppliance(applianceName);
+                        appliances.put(id, applianceList.newAppliance(applianceName));
+                        return new ApplianceEntityImpl(id, appliance);
+                    })
+                    .get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

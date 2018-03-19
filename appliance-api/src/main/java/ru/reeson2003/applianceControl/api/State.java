@@ -6,8 +6,20 @@ import java.util.Collection;
 /**
  * @author Pavel Gavrilov
  */
-public interface State extends Serializable {
-    String getStateName();
+public class State implements Serializable {
+    private String name;
+    private Collection<Parameter> parameters;
 
-    Collection<Parameter> getParameters();
+    public State(String name, Collection<Parameter> parameters) {
+        this.name = name;
+        this.parameters = parameters;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Collection<Parameter> getParameters() {
+        return parameters;
+    }
 }

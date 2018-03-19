@@ -5,8 +5,20 @@ import java.io.Serializable;
 /**
  * @author Pavel Gavrilov
  */
-public interface Parameter extends Serializable {
-    String getName();
+public class Parameter implements Serializable {
+    private String name;
+    private String value;
 
-    String getValue();
+    public Parameter(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

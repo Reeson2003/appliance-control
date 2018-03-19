@@ -41,7 +41,7 @@ public class ApplianceListImpl implements ApplianceList {
     public Appliance newAppliance(String name) {
         return applianceList.stream()
                 .filter(appliance -> appliance.getIdentifier().equals(name))
-                .map(Appliance::clone)
+                .map(Appliance::getNew)
                 .collect(Collectors.toList())
                 .get(0);
     }
