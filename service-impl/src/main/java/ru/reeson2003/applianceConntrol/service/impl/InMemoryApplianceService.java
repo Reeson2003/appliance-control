@@ -7,6 +7,7 @@ import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntityImpl;
 import ru.reeson2003.applianceControl.api.Action;
 import ru.reeson2003.applianceControl.api.Appliance;
 import ru.reeson2003.applianceControl.api.PerformActionException;
+import ru.reeson2003.applianceControl.api.StateChangeListener;
 
 import java.util.Collection;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class InMemoryApplianceService implements ApplianceService {
     private AtomicLong idGenerator = new AtomicLong(0);
     private Map<Long, Appliance> appliances = new ConcurrentHashMap<>();
     private ApplianceList applianceList;
+    private StateChangeListener listener = new SimpleApplianceListener();
 
     public InMemoryApplianceService(ApplianceList applianceList) {
         this.applianceList = applianceList;
@@ -57,7 +59,8 @@ public class InMemoryApplianceService implements ApplianceService {
                     .supplyAsync(() -> idGenerator.getAndIncrement())
                     .thenApply(id -> {
                         Appliance appliance = applianceList.newAppliance(applianceName);
-                        appliances.put(id, applianceList.newAppliance(applianceName));
+                        appliance.subscribeStateChange(listener);
+                        appliances.put(id, appliance);
                         return new ApplianceEntityImpl(id, appliance);
                     })
                     .get();
@@ -69,7 +72,7 @@ public class InMemoryApplianceService implements ApplianceService {
 
     @Override
     public void removeAppliance(Long applianceId) {
-        appliances.remove(applianceId);
+        appliances.remove(applianceId).unsubscribeStateChange(listener);
     }
 
     @Override
