@@ -5,10 +5,13 @@ include ':server'
 include ':service-api'
 include ':service-impl'
 include ':service-api'
+include ':lamp'
+include ':timer'
 
 project(':appliance-api').projectDir = "$rootDir/appliance-api" as File
 project(':service-api').projectDir = "$rootDir/service-api" as File
 project(':service-impl').projectDir = "$rootDir/service-impl" as File
 project(':server').projectDir = "$rootDir/server" as File
-include 'lamp'
+project(':lamp').projectDir = "$rootDir/lamp" as File
+project(':timer').projectDir = "$rootDir/timer" as File
 
