@@ -7,7 +7,7 @@ import java.util.Collection;
  * @author Pavel Gavrilov
  */
 public interface State extends Serializable {
-    String getSatateName();
+    String getStateName();
 
     Collection<Parameter> getParameters();
 }

@@ -10,3 +10,5 @@ project(':appliance-api').projectDir = "$rootDir/appliance-api" as File
 project(':service-api').projectDir = "$rootDir/service-api" as File
 project(':service-impl').projectDir = "$rootDir/service-impl" as File
 project(':server').projectDir = "$rootDir/server" as File
+include 'lamp'
+
