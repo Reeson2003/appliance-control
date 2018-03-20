@@ -1,9 +1,9 @@
 package ru.reeson2003.applianceConntrol.service.inMemory;
 
 import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
-import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntity;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
-import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntityImpl;
+import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
+import ru.reeson2003.applianceConntrol.service.api.IdentifiedApplianceImpl;
 import ru.reeson2003.applianceControl.api.Action;
 import ru.reeson2003.applianceControl.api.Appliance;
 import ru.reeson2003.applianceControl.api.PerformActionException;
@@ -31,29 +31,30 @@ public class InMemoryApplianceService implements ApplianceService {
     }
 
     @Override
-    public Collection<ApplianceEntity> getAppliances() {
+    public Collection<IdentifiedAppliance> getAppliances() {
         return appliances.entrySet().stream()
-                .map(entry -> new ApplianceEntityImpl(entry.getKey(), entry.getValue()))
+                .map(entry -> new IdentifiedApplianceImpl(entry.getValue(), entry.getKey()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<ApplianceEntity> getAppliancesByName(String name) {
-        return appliances.entrySet().stream()
+    public Collection<IdentifiedAppliance> getAppliancesByName(String name) {
+        return appliances.entrySet()
+                .stream()
                 .filter(entry -> entry.getValue().getIdentifier().equals(name))
-                .map(entry -> new ApplianceEntityImpl(entry.getKey(), entry.getValue()))
+                .map(entry -> new IdentifiedApplianceImpl(entry.getValue(), entry.getKey()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ApplianceEntity getApplianceById(Long id) {
+    public IdentifiedAppliance getApplianceById(Long id) {
         if (!appliances.containsKey(id))
             return null;
-        return new ApplianceEntityImpl(id, appliances.get(id));
+        return new IdentifiedApplianceImpl(appliances.get(id), id);
     }
 
     @Override
-    public ApplianceEntity addAppliance(String applianceName) {
+    public IdentifiedAppliance addAppliance(String applianceName) {
         try {
             return CompletableFuture
                     .supplyAsync(() -> idGenerator.getAndIncrement())
@@ -61,7 +62,7 @@ public class InMemoryApplianceService implements ApplianceService {
                         Appliance appliance = applianceList.newAppliance(applianceName);
                         appliance.subscribeStateChange(listener);
                         appliances.put(id, appliance);
-                        return new ApplianceEntityImpl(id, appliance);
+                        return new IdentifiedApplianceImpl(appliance, id);
                     })
                     .get();
         } catch (InterruptedException | ExecutionException e) {
