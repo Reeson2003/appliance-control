@@ -60,3 +60,99 @@ REST API contains following methods:
     ]
 }
 ```
+* **Show appliance by id**  
+`URL: /appliance?id=:id`  
+`METHOD: GET`  
+`URL PARAMS: id=[integer]`  
+`RESPONSE: appliance object`  
+`RESPONCE EXAMPLE:`  
+```json
+{
+    "id": 1,
+    "identifier": "Lamp",
+    "state": {
+        "name": "Off",
+        "parameters": []
+    },
+    "actions": [
+        {
+            "name": "turn on",
+            "parameters": []
+        }
+    ]
+}
+```
+* **Delete appliance**  
+`URL: /appliance?id=:id`  
+`METHOD: DELETE`  
+`URL PARAMS: id=[integer]`  
+`RESPONSE:`  
+`RESPONCE EXAMPLE:` 
+* **Show created appliances**  
+`URL: /appliances?name=:name`  
+`METHOD: GET`  
+`URL PARAMS: name=[string](optional)`  
+`RESPONSE: Array of appliance objects`  
+`RESPONCE EXAMPLE:` 
+```json
+[
+    {
+        "id": 289,
+        "identifier": "Timer",
+        "state": {
+            "name": "Off",
+            "parameters": []
+        },
+        "actions": [
+            {
+                "name": "turn on",
+                "parameters": [
+                    {
+                        "name": "time",
+                        "value": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 291,
+        "identifier": "Timer",
+        "state": {
+            "name": "Off",
+            "parameters": []
+        },
+        "actions": [
+            {
+                "name": "turn on",
+                "parameters": [
+                    {
+                        "name": "time",
+                        "value": ""
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+* **Control the appliance**  
+`URL: /appliance?id=:id`  
+`METHOD: GET`  
+`URL PARAMS: id=[integer]`  
+`DATA PARAMS: JSON object with action name and parameters`
+`REQUEST BODY EXAMPLE`  
+```json
+{
+    "parameters": [
+    	{
+    		"name": "time",
+    		"value": "10"
+    	}
+    	],
+    "actionName": "turn on"
+	
+}
+```
+`RESPONSE:`  
+`RESPONCE EXAMPLE:` 
