@@ -26,6 +26,13 @@ REST API contains following methods:
 `URL: /appliancelist`  
 `METHOD: GET`  
 `RESPONSE: Array of strings`
+`RESPONCE EXAMPLE:`  
+```json
+[
+    "Lamp",
+    "Timer"
+]
+```
 * **Create new appliance**  
 `URL: /appliance?name=:name`  
 `METHOD: POST`  
