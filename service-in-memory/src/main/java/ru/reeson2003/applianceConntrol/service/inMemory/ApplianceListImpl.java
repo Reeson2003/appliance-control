@@ -2,6 +2,7 @@ package ru.reeson2003.applianceConntrol.service.inMemory;
 
 import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
 import ru.reeson2003.applianceControl.api.Appliance;
+import ru.reeson2003.applianceControl.api.State;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -42,6 +43,15 @@ public class ApplianceListImpl implements ApplianceList {
         return applianceList.stream()
                 .filter(appliance -> appliance.getIdentifier().equals(name))
                 .map(Appliance::getNew)
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
+    @Override
+    public Appliance oldAppliance(String name, State state) {
+        return applianceList.stream()
+                .filter(appliance -> appliance.getIdentifier().equals(name))
+                .map(a -> a.getOld(state))
                 .collect(Collectors.toList())
                 .get(0);
     }
