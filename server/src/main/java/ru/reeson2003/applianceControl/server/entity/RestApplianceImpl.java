@@ -17,7 +17,7 @@ public class RestApplianceImpl implements RestAppliance {
     private Collection<Action> actions;
 
     public RestApplianceImpl(IdentifiedAppliance appliance) {
-        this.id = id;
+        this.id = appliance.getId();
         this.identifier = appliance.getIdentifier();
         this.state = appliance.getState();
         this.actions = appliance.getActions();

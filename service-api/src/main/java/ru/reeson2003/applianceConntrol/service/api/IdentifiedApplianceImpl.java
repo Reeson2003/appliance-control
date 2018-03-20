@@ -20,6 +20,7 @@ public class IdentifiedApplianceImpl implements IdentifiedAppliance {
         this.origin = origin;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
