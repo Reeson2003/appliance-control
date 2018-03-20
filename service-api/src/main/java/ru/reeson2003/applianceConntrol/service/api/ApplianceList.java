@@ -1,6 +1,7 @@
 package ru.reeson2003.applianceConntrol.service.api;
 
 import ru.reeson2003.applianceControl.api.Appliance;
+import ru.reeson2003.applianceControl.api.State;
 
 import java.util.Collection;
 
@@ -15,4 +16,6 @@ public interface ApplianceList {
     Collection<String> getApplianceList();
 
     Appliance newAppliance(String name);
+
+    Appliance oldAppliance(String name, State state);
 }
