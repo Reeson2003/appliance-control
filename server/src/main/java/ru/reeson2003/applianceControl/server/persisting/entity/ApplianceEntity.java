@@ -16,7 +16,7 @@ public class ApplianceEntity {
     private String identifier;
     @Column
     private String stateName;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "appliance_parameter",
             joinColumns = @JoinColumn(name = "appliance_id"),
@@ -28,6 +28,9 @@ public class ApplianceEntity {
         this.identifier = identifier;
         this.stateName = stateName;
         this.parameters = parameters;
+    }
+
+    protected ApplianceEntity() {
     }
 
     public Long getId() {

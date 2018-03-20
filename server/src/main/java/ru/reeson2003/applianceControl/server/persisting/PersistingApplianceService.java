@@ -1,15 +1,15 @@
 package ru.reeson2003.applianceControl.server.persisting;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
 import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
 import ru.reeson2003.applianceConntrol.service.api.IdentifiedApplianceImpl;
 import ru.reeson2003.applianceControl.api.*;
+import ru.reeson2003.applianceControl.server.persisting.entity.ApplianceEntity;
 import ru.reeson2003.applianceControl.server.persisting.entity.ParameterEntity;
 import ru.reeson2003.applianceControl.server.persisting.repository.ApplianceRepository;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -31,21 +31,17 @@ public class PersistingApplianceService implements ApplianceService {
     public PersistingApplianceService(ApplianceRepository repository, ApplianceList applianceList) {
         this.repository = repository;
         this.applianceList = applianceList;
-        init();
     }
 
+    @PostConstruct
     void init() {
-        CompletableFuture.supplyAsync(repository::findAll)
-                .thenAccept(applianceEntities -> {
-                    applianceEntities
-                            .forEach(entity ->
-                                    appliances.put(entity.getId(),
-                                            applianceList.oldAppliance(entity.getIdentifier(),
-                                                    new State(entity.getStateName(), entity.getParameters()
-                                                            .stream()
-                                                            .map(p -> new Parameter(p.getKey(), p.getValue()))
-                                                            .collect(Collectors.toList())))));
-                });
+        repository.findAll()
+                .forEach(entity -> initAppliance(
+                        applianceList.oldAppliance(entity.getIdentifier(),
+                                new State(entity.getStateName(), entity.getParameters()
+                                        .stream()
+                                        .map(p -> new Parameter(p.getKey(), p.getValue()))
+                                        .collect(Collectors.toList()))), entity.getId()));
     }
 
     @Override
@@ -78,10 +74,7 @@ public class PersistingApplianceService implements ApplianceService {
                     .supplyAsync(() -> applianceList.newAppliance(applianceName))
                     .thenApply(appliance -> {
                         Long id = repository.saveAppliance(appliance);
-                        Listener listener = new Listener(id);
-                        appliance.subscribeStateChange(new Listener(id));
-                        listeners.put(id, Arrays.asList(listener));
-                        appliances.put(id, appliance);
+                        initAppliance(appliance, id);
                         return new IdentifiedApplianceImpl(appliance, id);
                     })
                     .get();
@@ -89,6 +82,13 @@ public class PersistingApplianceService implements ApplianceService {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private void initAppliance(Appliance appliance, Long id) {
+        Listener listener = new Listener(id);
+        appliance.subscribeStateChange(new Listener(id));
+        listeners.put(id, Arrays.asList(listener));
+        appliances.put(id, appliance);
     }
 
     @Override
@@ -109,12 +109,13 @@ public class PersistingApplianceService implements ApplianceService {
     }
 
     private void changeState(Long id, State state) {
-        CompletableFuture.supplyAsync(() -> repository.getOne(id))
+        CompletableFuture.supplyAsync(() -> repository.findById(id).get())
                 .thenApply(entity -> {
                     entity.setStateName(state.getName());
                     entity.setParameters(state.getParameters().stream()
                             .map(p -> new ParameterEntity(p.getName(), p.getValue()))
                             .collect(Collectors.toList()));
+                    System.out.println(entity.getStateName());
                     return entity;
                 })
                 .thenAccept(repository::save);
