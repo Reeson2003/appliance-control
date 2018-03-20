@@ -1,4 +1,4 @@
-package ru.reeson2003.applianceConntrol.service.impl;
+package ru.reeson2003.applianceConntrol.service.inMemory;
 
 import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
 import ru.reeson2003.applianceControl.api.Appliance;

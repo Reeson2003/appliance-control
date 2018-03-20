@@ -3,14 +3,14 @@ rootProject.name = 'appliance-control'
 include ':appliance-api'
 include ':server'
 include ':service-api'
-include ':service-impl'
+include ':service-in-memory'
 include ':service-api'
 include ':lamp'
 include ':timer'
 
 project(':appliance-api').projectDir = "$rootDir/appliance-api" as File
 project(':service-api').projectDir = "$rootDir/service-api" as File
-project(':service-impl').projectDir = "$rootDir/service-impl" as File
+project(':service-in-memory').projectDir = "$rootDir/service-in-memory" as File
 project(':server').projectDir = "$rootDir/server" as File
 project(':lamp').projectDir = "$rootDir/lamp" as File
 project(':timer').projectDir = "$rootDir/timer" as File

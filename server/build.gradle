@@ -14,6 +14,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'application'
+mainClassName = 'ru.reeson2003.applianceControl.server.ApplianceControlApplication'
+
 
 repositories {
 	mavenCentral()
@@ -23,7 +26,7 @@ repositories {
 dependencies {
     compile project(':appliance-api')
     compile project(':service-api')
-    compile project(':service-impl')
+    compile project(':service-in-memory')
 	compile project(':lamp')
 	compile project(':timer')
 	compile('org.springframework.boot:spring-boot-starter-web')

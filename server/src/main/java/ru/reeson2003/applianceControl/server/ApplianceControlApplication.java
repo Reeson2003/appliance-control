@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
-import ru.reeson2003.applianceConntrol.service.impl.ApplianceListImpl;
-import ru.reeson2003.applianceConntrol.service.impl.InMemoryApplianceService;
+import ru.reeson2003.applianceConntrol.service.inMemory.ApplianceListImpl;
+import ru.reeson2003.applianceConntrol.service.inMemory.InMemoryApplianceService;
 import ru.reeson2003.applianceControl.lamp.Lamp;
 import ru.reeson2003.applianceControl.timer.Timer;
 
