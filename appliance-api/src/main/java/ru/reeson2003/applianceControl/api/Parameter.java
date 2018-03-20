@@ -21,4 +21,9 @@ public class Parameter implements Serializable {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return '{' + name + ':' + value + '}';
+    }
 }

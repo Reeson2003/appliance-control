@@ -7,6 +7,7 @@ include ':service-in-memory'
 include ':service-api'
 include ':lamp'
 include ':timer'
+include ':oven'
 
 project(':appliance-api').projectDir = "$rootDir/appliance-api" as File
 project(':service-api').projectDir = "$rootDir/service-api" as File
@@ -14,4 +15,5 @@ project(':service-in-memory').projectDir = "$rootDir/service-in-memory" as File
 project(':server').projectDir = "$rootDir/server" as File
 project(':lamp').projectDir = "$rootDir/lamp" as File
 project(':timer').projectDir = "$rootDir/timer" as File
+project(':oven').projectDir = "$rootDir/oven" as File
 

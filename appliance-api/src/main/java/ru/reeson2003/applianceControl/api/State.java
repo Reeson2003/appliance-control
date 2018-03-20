@@ -22,4 +22,12 @@ public class State implements Serializable {
     public Collection<Parameter> getParameters() {
         return parameters;
     }
+
+    @Override
+    public String toString() {
+        return "State{" +
+                "name='" + name + '\'' +
+                ", parameters=" + parameters +
+                '}';
+    }
 }

@@ -132,9 +132,9 @@ public class PersistingApplianceService implements ApplianceService {
 
         @Override
         public void onStateChange(State state) {
-            System.out.println("Changing state of appliance id: " + id);
+            System.out.println("Changing state of " + appliances.get(id).getIdentifier() + " id: " + id);
             changeState(id, state);
-            System.out.println("New state is: " + state.getName());
+            System.out.println("New state is: " + state);
         }
     }
 }

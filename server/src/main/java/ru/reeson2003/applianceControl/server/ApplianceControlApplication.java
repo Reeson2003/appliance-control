@@ -11,6 +11,7 @@ import ru.reeson2003.applianceControl.lamp.Lamp;
 import ru.reeson2003.applianceControl.server.persisting.PersistingApplianceService;
 import ru.reeson2003.applianceControl.server.persisting.repository.ApplianceRepository;
 import ru.reeson2003.applianceControl.timer.Timer;
+import ru.reeson2003.applianceControl.oven.Oven;
 
 @SpringBootApplication
 public class ApplianceControlApplication {
@@ -19,7 +20,8 @@ public class ApplianceControlApplication {
     public ApplianceList getApplianceList() {
         return new ApplianceListImpl(
                 new Lamp(),
-                new Timer()
+                new Timer(),
+                new Oven()
         );
     }
 
