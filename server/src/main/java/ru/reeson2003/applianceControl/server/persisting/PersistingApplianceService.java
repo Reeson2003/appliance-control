@@ -115,7 +115,6 @@ public class PersistingApplianceService implements ApplianceService {
                     entity.setParameters(state.getParameters().stream()
                             .map(p -> new ParameterEntity(p.getName(), p.getValue()))
                             .collect(Collectors.toList()));
-                    System.out.println(entity.getStateName());
                     return entity;
                 })
                 .thenAccept(repository::save);
