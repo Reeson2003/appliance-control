@@ -1,13 +1,15 @@
 package ru.reeson2003.applianceControl.server.persisting.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.reeson2003.applianceControl.server.persisting.entity.PersistingAppliance;
+import org.springframework.stereotype.Repository;
+import ru.reeson2003.applianceControl.server.persisting.entity.ApplianceEntity;
 
 import java.util.Collection;
 
 /**
  * @author Pavel Gavrilov
  */
-public interface ApplianceRepository extends JpaRepository<PersistingAppliance, Long> {
-    Collection<PersistingAppliance> findByName();
+@Repository
+public interface ApplianceRepository extends JpaRepository<ApplianceEntity, Long> {
+    Collection<ApplianceEntity> findByName();
 }

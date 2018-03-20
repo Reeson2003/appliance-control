@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "appliance")
-public class PersistingAppliance {
+public class ApplianceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,12 +19,12 @@ public class PersistingAppliance {
     @OneToOne(cascade = CascadeType.ALL)
     private StateEntity state;
 
-    public PersistingAppliance(String name, StateEntity state) {
+    public ApplianceEntity(String name, StateEntity state) {
         this.name = name;
         this.state = state;
     }
 
-    protected PersistingAppliance() {
+    protected ApplianceEntity() {
     }
 
     public Long getId() {
