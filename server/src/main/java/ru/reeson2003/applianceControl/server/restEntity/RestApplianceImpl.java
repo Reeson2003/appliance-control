@@ -1,6 +1,6 @@
 package ru.reeson2003.applianceControl.server.restEntity;
 
-import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
+import ru.reeson2003.applianceControl.service.api.IdentifiedAppliance;
 import ru.reeson2003.applianceControl.api.Action;
 import ru.reeson2003.applianceControl.api.State;
 

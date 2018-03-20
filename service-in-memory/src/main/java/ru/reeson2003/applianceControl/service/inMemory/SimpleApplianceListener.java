@@ -1,4 +1,4 @@
-package ru.reeson2003.applianceConntrol.service.inMemory;
+package ru.reeson2003.applianceControl.service.inMemory;
 
 import ru.reeson2003.applianceControl.api.State;
 import ru.reeson2003.applianceControl.api.StateChangeListener;

@@ -2,8 +2,8 @@ package ru.reeson2003.applianceControl.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
-import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
+import ru.reeson2003.applianceControl.service.api.ApplianceList;
+import ru.reeson2003.applianceControl.service.api.ApplianceService;
 import ru.reeson2003.applianceControl.server.common.RestConstants;
 import ru.reeson2003.applianceControl.server.deserialize.DeserializableAction;
 import ru.reeson2003.applianceControl.server.restEntity.RestAppliance;

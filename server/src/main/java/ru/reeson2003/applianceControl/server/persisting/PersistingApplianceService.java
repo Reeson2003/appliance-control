@@ -1,11 +1,10 @@
 package ru.reeson2003.applianceControl.server.persisting;
 
-import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
-import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
-import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
-import ru.reeson2003.applianceConntrol.service.api.IdentifiedApplianceImpl;
+import ru.reeson2003.applianceControl.service.api.ApplianceList;
+import ru.reeson2003.applianceControl.service.api.ApplianceService;
+import ru.reeson2003.applianceControl.service.api.IdentifiedAppliance;
+import ru.reeson2003.applianceControl.service.api.IdentifiedApplianceImpl;
 import ru.reeson2003.applianceControl.api.*;
-import ru.reeson2003.applianceControl.server.persisting.entity.ApplianceEntity;
 import ru.reeson2003.applianceControl.server.persisting.entity.ParameterEntity;
 import ru.reeson2003.applianceControl.server.persisting.repository.ApplianceRepository;
 

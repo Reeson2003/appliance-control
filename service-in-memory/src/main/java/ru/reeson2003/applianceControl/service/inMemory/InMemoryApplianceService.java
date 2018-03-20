@@ -1,9 +1,9 @@
-package ru.reeson2003.applianceConntrol.service.inMemory;
+package ru.reeson2003.applianceControl.service.inMemory;
 
-import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
-import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
-import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
-import ru.reeson2003.applianceConntrol.service.api.IdentifiedApplianceImpl;
+import ru.reeson2003.applianceControl.service.api.ApplianceList;
+import ru.reeson2003.applianceControl.service.api.ApplianceService;
+import ru.reeson2003.applianceControl.service.api.IdentifiedAppliance;
+import ru.reeson2003.applianceControl.service.api.IdentifiedApplianceImpl;
 import ru.reeson2003.applianceControl.api.Action;
 import ru.reeson2003.applianceControl.api.Appliance;
 import ru.reeson2003.applianceControl.api.PerformActionException;
