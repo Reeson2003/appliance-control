@@ -1,5 +1,6 @@
 package ru.reeson2003.applianceControl.server;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,8 @@ import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
 import ru.reeson2003.applianceConntrol.service.inMemory.ApplianceListImpl;
 import ru.reeson2003.applianceConntrol.service.inMemory.InMemoryApplianceService;
 import ru.reeson2003.applianceControl.lamp.Lamp;
+import ru.reeson2003.applianceControl.server.persisting.PersistingApplianceService;
+import ru.reeson2003.applianceControl.server.persisting.repository.ApplianceRepository;
 import ru.reeson2003.applianceControl.timer.Timer;
 
 @SpringBootApplication
@@ -22,8 +25,9 @@ public class ApplianceControlApplication {
     }
 
     @Bean
-    public ApplianceService getApplianceService() {
-        return new InMemoryApplianceService(getApplianceList());
+    @Autowired
+    public ApplianceService getApplianceService(ApplianceRepository repository) {
+        return new PersistingApplianceService(repository, getApplianceList());
     }
 
     public static void main(String[] args) {

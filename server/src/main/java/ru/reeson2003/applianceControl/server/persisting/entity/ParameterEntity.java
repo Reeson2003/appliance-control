@@ -6,14 +6,14 @@ import javax.persistence.*;
  * @author Pavel Gavrilov
  */
 @Entity
-@Table(name = "parameter")
+@Table(name = "parameters")
 public class ParameterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "key")
     private String key;
-    @Column(name = "valie")
+    @Column(name = "value")
     private String value;
 
     public ParameterEntity(String key, String value) {

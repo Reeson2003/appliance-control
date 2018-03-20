@@ -1,9 +1,7 @@
 package ru.reeson2003.applianceControl.server.persisting.entity;
 
-import ru.reeson2003.applianceControl.api.Action;
-
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Pavel Gavrilov
@@ -14,50 +12,53 @@ public class ApplianceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "anme")
-    private String name;
-    @OneToOne(cascade = CascadeType.ALL)
-    private StateEntity state;
+    @Column
+    private String identifier;
+    @Column
+    private String stateName;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "appliance_parameter",
+            joinColumns = @JoinColumn(name = "appliance_id"),
+            inverseJoinColumns = @JoinColumn(name = "parameter_id")
+    )
+    private List<ParameterEntity> parameters;
 
-    public ApplianceEntity(String name, StateEntity state) {
-        this.name = name;
-        this.state = state;
-    }
-
-    protected ApplianceEntity() {
+    public ApplianceEntity(String identifier, String stateName, List<ParameterEntity> parameters) {
+        this.identifier = identifier;
+        this.stateName = stateName;
+        this.parameters = parameters;
     }
 
     public Long getId() {
         return id;
     }
 
-    @Override
-    public String getIdentifier() {
-        return null;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
-    public StateEntity getState() {
-        return state;
+    public String getStateName() {
+        return stateName;
     }
 
-    @Override
-    public Collection<Action> getActions() {
-        return null;
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 
-    public void setState(StateEntity state) {
-        this.state = state;
+    public List<ParameterEntity> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<ParameterEntity> parameters) {
+        this.parameters = parameters;
     }
 }
