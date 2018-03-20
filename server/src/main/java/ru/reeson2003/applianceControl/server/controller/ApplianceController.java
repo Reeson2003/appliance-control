@@ -6,8 +6,8 @@ import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
 import ru.reeson2003.applianceControl.server.common.RestConstants;
 import ru.reeson2003.applianceControl.server.deserialize.DeserializableAction;
-import ru.reeson2003.applianceControl.server.entity.RestAppliance;
-import ru.reeson2003.applianceControl.server.entity.RestApplianceImpl;
+import ru.reeson2003.applianceControl.server.restEntity.RestAppliance;
+import ru.reeson2003.applianceControl.server.restEntity.RestApplianceImpl;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

@@ -1,6 +1,5 @@
 package ru.reeson2003.applianceControl.server.persisting.entity;
 
-import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntity;
 import ru.reeson2003.applianceControl.api.Action;
 
 import javax.persistence.*;
@@ -11,7 +10,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "appliance")
-public class PersistingAppliance implements ApplianceEntity {
+public class PersistingAppliance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

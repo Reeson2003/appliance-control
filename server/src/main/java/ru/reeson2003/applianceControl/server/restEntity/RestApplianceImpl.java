@@ -1,8 +1,7 @@
-package ru.reeson2003.applianceControl.server.entity;
+package ru.reeson2003.applianceControl.server.restEntity;
 
 import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
 import ru.reeson2003.applianceControl.api.Action;
-import ru.reeson2003.applianceControl.api.Appliance;
 import ru.reeson2003.applianceControl.api.State;
 
 import java.util.Collection;

@@ -1,8 +1,11 @@
 package ru.reeson2003.applianceControl.server.persisting;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceList;
 import ru.reeson2003.applianceConntrol.service.api.ApplianceService;
+import ru.reeson2003.applianceConntrol.service.api.IdentifiedAppliance;
+import ru.reeson2003.applianceConntrol.service.api.IdentifiedApplianceImpl;
 import ru.reeson2003.applianceConntrol.service.api.entity.ApplianceEntity;
 import ru.reeson2003.applianceControl.api.Action;
 import ru.reeson2003.applianceControl.server.persisting.entity.PersistingAppliance;
@@ -14,21 +17,28 @@ import java.util.stream.Collectors;
 /**
  * @author Pavel Gavrilov
  */
+@Service
 public class PersistingApplianceService implements ApplianceService {
+    private final ApplianceRepository repository;
+    private final ApplianceList applianceList;
+
     @Autowired
-    private ApplianceRepository repository;
-    @Autowired
-    private ApplianceList applianceList;
+    public PersistingApplianceService(ApplianceRepository repository, ApplianceList applianceList) {
+        this.repository = repository;
+        this.applianceList = applianceList;
+    }
+
     @Override
-    public Collection<ApplianceEntity> getAppliances() {
+    public Collection<IdentifiedAppliance> getAppliances() {
         return repository.findAll()
                 .stream()
-                .map(this::convertTo)
+                .map(persistingAppliance ->
+                        new IdentifiedApplianceImpl(persistingAppliance.getId(),))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<ApplianceEntity> getAppliancesByName(String name) {
+    public Collection<IdentifiedAppliance> getAppliancesByName(String name) {
         return repository.findByName()
                 .stream()
                 .map(this::convertTo)
@@ -36,12 +46,12 @@ public class PersistingApplianceService implements ApplianceService {
     }
 
     @Override
-    public ApplianceEntity getApplianceById(Long id) {
+    public IdentifiedAppliance getApplianceById(Long id) {
         return convertTo(repository.getOne(id));
     }
 
     @Override
-    public ApplianceEntity addAppliance(String applianceName) {
+    public IdentifiedAppliance addAppliance(String applianceName) {
         repository.save(convertFrom(applianceList.newAppliance(applianceName)))
         return null;
     }
@@ -55,8 +65,4 @@ public class PersistingApplianceService implements ApplianceService {
     public void performAction(Long applianceId, Action action) {
 
     }
-
-    private ApplianceEntity convertTo(PersistingAppliance entity) {}
-
-    private PersistingAppliance convertFrom(ApplianceEntity entity) {}
 }
