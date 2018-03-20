@@ -2,9 +2,10 @@
 ## Description ##
 Appliance control is backend service to control an appliances.
 
-Project contains java API to develop and implement custom appliances. Also it contains some implementations of appliance such as Lamp and Timer.
-
-Project contains java spring-boot based application with REST API.
+Project contains java API to develop and implement custom appliances.  
+Also it contains some implementations of appliance such as Lamp and Timer.  
+Project contains java spring-boot based application with REST API.  
+State of appliances persisting in embedded H2 database.
 
 ## Build and run ##
 To build project run following command:
@@ -137,10 +138,11 @@ REST API contains following methods:
 ]
 ```
 * **Control the appliance**  
+
 `URL: /appliance?id=:id`  
 `METHOD: GET`  
 `URL PARAMS: id=[integer]`  
-`DATA PARAMS: JSON object with action name and parameters`
+`DATA PARAMS: JSON object with action name and parameters array`
 `REQUEST BODY EXAMPLE`  
 ```json
 {
