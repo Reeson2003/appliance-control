@@ -29,6 +29,8 @@ dependencies {
     compile project(':service-in-memory')
 	compile project(':lamp')
 	compile project(':timer')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
